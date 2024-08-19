@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart Example</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header class="header">
+        <button class="back-button" onclick="goBack()">← Back</button>
+        <h1>Biểu Đồ Cột Thống Kê Sức Khỏe</h1>
+    </header>
+    
+    <div class="note">
+        <p>Biểu đồ cột hiển thị các chỉ số sức khỏe hàng tháng. Dữ liệu có thể được cập nhật để theo dõi tình trạng sức khỏe của bạn.</p>
+    </div>
+    
+    <div class="container">
+        <div class="chart-container">
+            <canvas id="barChart"></canvas>
+        </div>
+        <div class="info-container">
+            <h2>Chỉ số hiện tại</h2>
+            <p><strong>Nhiệt độ:</strong> <span id="temperature">36.8°C</span></p>
+            <p><strong>Nhịp tim:</strong> <span id="heartRate">80 bpm</span></p>
+            <p><strong>Huyết áp:</strong> <span id="bloodPressure">125/85 mmHg</span></p>
+        </div>
+    </div>
+    
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('barChart').getContext('2d');
+            const barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'],
+                    datasets: [{
+                        label: 'Nhiệt độ cơ thể (°C)',
+                        data: [36.5, 36.7, 36.8, 36.6, 36.9, 37.0],
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+
+            // Cập nhật chỉ số bên cạnh (dữ liệu tĩnh)
+            document.getElementById('temperature').innerText = '36.8°C';
+            document.getElementById('heartRate').innerText = '80 bpm';
+            document.getElementById('bloodPressure').innerText = '125/85 mmHg';
+        });
+    </script>
+</body>
+</html>
